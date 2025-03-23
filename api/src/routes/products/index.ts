@@ -1,12 +1,10 @@
 import { Router } from "express";
+import { listProducts } from "./productsController";
 
 //Products endpoints
 const router = Router();
 
-router.get("/", (req: any, res: any) => {
-  console.log(req.params);
-  res.send("List of products page!");
-});
+router.get("/", listProducts);
 
 router.get("/:id", (req: any, res: any) => {
   console.log(req.params);
