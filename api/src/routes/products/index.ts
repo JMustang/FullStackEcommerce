@@ -3,6 +3,7 @@ import {
   createProducts,
   getProductsById,
   listProducts,
+  updateProducts,
 } from "./productsController";
 
 //Products endpoints
@@ -14,9 +15,7 @@ router.get("/:id", getProductsById);
 
 router.post("/", createProducts);
 
-router.put("/:id", (req: any, res: any) => {
-  res.send("Update products page!");
-});
+router.put("/:id", updateProducts);
 
 router.delete("/:id", (req: any, res: any) => {
   res.send("Delete products page!");
