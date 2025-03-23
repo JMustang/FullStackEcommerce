@@ -15,3 +15,7 @@ export function createProducts(req: any, res: any) {
 export function updateProducts(req: any, res: any) {
   res.send("Update products page!");
 }
+
+export function deleteProducts(req: any, res: any) {
+  res.send("Delete products page!");
+}
