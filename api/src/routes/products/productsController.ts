@@ -1,21 +1,23 @@
-export function listProducts(req: any, res: any) {
+import { Request, Response } from "express";
+
+export function listProducts(req: Request, res: Response) {
   console.log(req.params);
   res.send("List of products page!");
 }
 
-export function getProductsById(req: any, res: any) {
+export function getProductsById(req: Request, res: Response) {
   console.log(req.params);
   res.send("Just one product page!");
 }
 
-export function createProducts(req: any, res: any) {
+export function createProducts(req: Request, res: Response) {
   res.send("Create products page!");
 }
 
-export function updateProducts(req: any, res: any) {
+export function updateProducts(req: Request, res: Response) {
   res.send("Update products page!");
 }
 
-export function deleteProducts(req: any, res: any) {
+export function deleteProducts(req: Request, res: Response) {
   res.send("Delete products page!");
 }
