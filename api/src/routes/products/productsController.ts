@@ -11,3 +11,7 @@ export function getProductsById(req: any, res: any) {
 export function createProducts(req: any, res: any) {
   res.send("Create products page!");
 }
+
+export function updateProducts(req: any, res: any) {
+  res.send("Update products page!");
+}
