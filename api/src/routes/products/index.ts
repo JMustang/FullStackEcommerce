@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createProducts,
+  deleteProducts,
   getProductsById,
   listProducts,
   updateProducts,
@@ -17,8 +18,6 @@ router.post("/", createProducts);
 
 router.put("/:id", updateProducts);
 
-router.delete("/:id", (req: any, res: any) => {
-  res.send("Delete products page!");
-});
+router.delete("/:id", deleteProducts);
 
 export default router;
