@@ -14,11 +14,11 @@ export async function listProducts(req: Request, res: Response) {
 
 export async function getProductsById(req: Request, res: Response) {
   try {
-    const { id } = req.params;
+    const id = Number(req.params.id);
     const [product] = await db
       .select()
       .from(productsTable)
-      .where(eq(productsTable.id, Number(id)));
+      .where(eq(productsTable.id, id));
 
     if (!product) {
       res.status(404).send({ message: "Product not found!" });
@@ -49,8 +49,18 @@ export function updateProducts(req: Request, res: Response) {
   }
 }
 
-export function deleteProducts(req: Request, res: Response) {
+export async function deleteProducts(req: Request, res: Response) {
   try {
+    const id = Number(req.params.id);
+    const [deletedProduct] = await db
+      .delete(productsTable)
+      .where(eq(productsTable.id, id))
+      .returning();
+    if (deletedProduct) {
+      res.status(204).send();
+    } else {
+      res.status(404).send({ message: "Product was not found!" });
+    }
   } catch (e) {
     res.status(500).send(e);
   }
