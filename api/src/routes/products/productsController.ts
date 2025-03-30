@@ -42,8 +42,22 @@ export async function createProducts(req: Request, res: Response) {
   }
 }
 
-export function updateProducts(req: Request, res: Response) {
+export async function updateProducts(req: Request, res: Response) {
   try {
+    const id = Number(req.params.id);
+    const updateFields = req.body;
+
+    const [product] = await db
+      .update(productsTable)
+      .set(updateFields)
+      .where(eq(productsTable.id, id))
+      .returning();
+
+    if (product) {
+      res.json(product);
+    } else {
+      res.status(404).send({ message: "Product was not found!" });
+    }
   } catch (e) {
     res.status(500).send(e);
   }
