@@ -17,7 +17,10 @@ import { z } from "zod";
 //   price: z.number(),
 // });
 
-const createProductSchema = createInsertSchema(productsTable);
+const createProductSchema = createInsertSchema(productsTable).omit({
+  id: true,
+});
+type ProductType = z.infer<typeof createProductSchema>;
 
 //Products endpoints
 const router = Router();
