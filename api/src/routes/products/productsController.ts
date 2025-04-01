@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { db } from "../../db/index";
 import { productsTable } from "../../db/productsSchema";
 import { eq } from "drizzle-orm";
+import _ from "lodash";
+import { createProductSchema } from "./index";
 
 export async function listProducts(req: Request, res: Response) {
   try {
@@ -32,10 +34,8 @@ export async function getProductsById(req: Request, res: Response) {
 
 export async function createProducts(req: Request, res: Response) {
   try {
-    const [product] = await db
-      .insert(productsTable)
-      .values(req.body)
-      .returning();
+    const data = _.pick(req.body, Object.keys(createProductSchema.shape));
+    const [product] = await db.insert(productsTable).values(data).returning();
     res.status(201).json(product);
   } catch (e) {
     res.status(500).send(e);
